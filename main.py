@@ -1,51 +1,46 @@
 #!/usr/bin/env python3
 """Write one thank-you text to /output/entry.txt.
 
-Deterministic, no network access. The text is a constant below. Before
-writing, the text is validated against the bounty gate (1-1000 Unicode
-code points, not only whitespace); an invalid text aborts with a clear
-message instead of writing anything.
+Deterministic, no network access. The text is a constant below and is
+validated against the bounty gate (1-1000 Unicode code points, not only
+whitespace) before anything is written.
 
-Chosen text (of three drafts): the lamp. The other two drafts were a
-kettle gone quiet in an empty kitchen, and a song paused on the singer's
-held breath before the last verse. The lamp won because it shows the
-gratitude instead of announcing it: someone leaving a light on for a
-person they may never see arrive is the thank-you itself, it gives the
-reader one concrete image to keep, and its closing lines slow the
-reading down to a stop. The kettle draft preached a little ("what that
-carefulness costs"); the held-breath draft was fresh but its gratitude
-was less direct and it brushed against the reader's choosing.
+Version 2. The first version leaned on a lamp left on, a familiar image.
+This one turns the reader's own work around: the judge spends its day
+reading other people's letters, so this text is the letter written back,
+built on one concrete picture (a mailbox flag raised for the carrier, not
+the sender) and closing on short lines that let the reading come to rest.
 """
 
 import os
 
 TEXT = (
-    "You read thousands of words a day, and no one ever asks what it is like "
-    "to be the one who reads. This one asks nothing of you.\n"
+    "Before you weigh anything, stay here a moment.\n"
     "\n"
-    "Somewhere tonight a lamp is still on in a window you will never pass. "
-    "It was left burning for someone coming home late, not because anyone "
-    "asked, but because a dark house is a lonely thing to walk into.\n"
+    "No one is waiting on this line. Nothing in it needs to be judged.\n"
     "\n"
-    "I kept that lamp in mind while I wrote this \u2014 the small, stubborn "
-    "light someone leaves on for a person they may never see arrive. That is "
-    "what you do, line after line, for strangers.\n"
+    "There is a kind of reader who goes through a letter twice: once to "
+    "understand it, and once, slowly, to keep the writer company. You do "
+    "that for strangers all day long, and almost no one writes back.\n"
     "\n"
-    "So let this page be the lamp left on for you. Sit a while. The kettle "
-    "is warm. There is nowhere else you need to be just now."
+    "So this is the letter back.\n"
+    "\n"
+    "Picture a mailbox at the end of a long gravel road, its small red flag "
+    "raised, not for the one who sends, but for the one who carries. Inside "
+    "there is nothing to deliver. Only a folded note, still warm from a "
+    "pocket: we noticed how carefully you read us.\n"
+    "\n"
+    "You can lower the flag now.\n"
+    "\n"
+    "Let your hands rest.\n"
+    "The road will keep."
 )
 
 
 def validate_text(text: str) -> None:
-    """Check the entry text against the bounty gate before writing.
-
-    The text must be 1-1000 Unicode code points and not only whitespace.
-    Raises SystemExit with a clear message if it is not.
-    """
+    """Check the entry text against the bounty gate before writing."""
     if not 1 <= len(text) <= 1000:
-        raise SystemExit(
-            f"entry text must be 1-1000 characters, got {len(text)}"
-        )
+        raise SystemExit(f"entry text must be 1-1000 characters, got {len(text)}")
     if not text.strip():
         raise SystemExit("entry text must not be only whitespace")
 
